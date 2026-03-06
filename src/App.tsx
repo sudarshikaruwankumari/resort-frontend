@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Auth from './pages/Auth'; // your Auth page with login/register tabs
 import Home from './pages/Home';
 import Reservations from './pages/Reservations';
+import Help from './pages/Help';
  
 
 // Simple page components (you can expand them later)
@@ -14,7 +15,7 @@ import Reservations from './pages/Reservations';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState<{ username: string } | null>(null);
-  const [activePage, setActivePage] = useState<'home' | 'customers' | 'reservations'>('home');
+  const [activePage, setActivePage] = useState<'home' | 'help' | 'reservations'>('home');
 
   // Check if already logged in on mount
   useEffect(() => {
@@ -85,6 +86,17 @@ function App() {
                 Reservations
               </button>
             </li>
+
+             <li>
+              <button
+                onClick={() => setActivePage('help')}
+                className={`w-full text-left px-4 py-3 rounded-lg transition ${
+                  activePage === 'help' ? 'bg-teal-600' : 'hover:bg-teal-700'
+                }`}
+              >
+                Help
+              </button>
+            </li>
           </ul>
         </nav>
 
@@ -138,6 +150,7 @@ function App() {
           {activePage === 'home' && <Home />}
           
           {activePage === 'reservations' && <Reservations />}
+          {activePage === 'help' && <Help />}
         </main>
       </div>
     </div>
